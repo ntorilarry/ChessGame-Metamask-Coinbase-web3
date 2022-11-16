@@ -6,11 +6,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Bgr from "../../../core/resources/images/BG.jpg";
+import {useAuth} from "../auth/auth"
 
 function Login() {
-  let history = useNavigate();
+ const navigate = useNavigate();
   const [isConnected, setIsConnected] = useState(false);
   const [ethBalance, setEthBalance] = useState("");
+  const auth = useAuth()
 
   const detectCurrentProvider = () => {
     let provider;
@@ -32,6 +34,10 @@ function Login() {
   };
 
   const onConnect = async () => {
+    const handleLogin = () => {
+      auth.login(isConnected);
+    }
+  
     try {
       const currentProvider = detectCurrentProvider();
       if (currentProvider) {
@@ -42,8 +48,9 @@ function Login() {
         let ethBalance = await web3.eth.getBalance(account);
         setEthBalance(ethBalance);
         setIsConnected(true);
+        
         toast.success("Login Successful");
-        history("/administrator");
+        navigate("/administrator", {replace: true});
       }
     } catch (err) {
       console.log(err);

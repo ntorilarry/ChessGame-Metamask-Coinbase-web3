@@ -1,13 +1,16 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Mainlayout from "../../presentation/layout/mainlayout";
+import { AuthProvider } from "../../presentation/pages/auth/auth";
 import Login from "../../presentation/pages/auth/login";
+import { Requireauth } from "../../presentation/pages/auth/requireauth";
 import Adminstrators from "../../presentation/pages/main/adminstrators/adminstrators";
 import Completed from "../../presentation/pages/main/completed/completed";
 
 function Routing() {
   return (
     <div>
+      <AuthProvider>
       <Routes>
         {/* Auth Routes */}
         <Route path="auth">
@@ -25,8 +28,8 @@ function Routing() {
           }
         >
           <Route index element={<Navigate replace to="administrator" />} />
-          <Route path="administrator" element={<Adminstrators />} />
-          <Route path="completed" element={<Completed />} />
+          <Route path="administrator" element={<Requireauth><Adminstrators /></Requireauth>} />
+          <Route path="completed" element={<Requireauth><Completed /></Requireauth>} />
         </Route>
 
         {/* Not found */}
@@ -39,6 +42,7 @@ function Routing() {
           }
         />
       </Routes>
+      </AuthProvider>
     </div>
   );
 }

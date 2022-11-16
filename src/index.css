@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+                
+
+@layer base {
+  * {
+    @apply font-[Gilroy];
+  }
+}
+
+@layer components {
+  .info-active {
+    @apply text-gray-900  border-blue-600 border-b-2;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .logo-brand {
+    @apply flex gap-3 items-center z-20;
+  }
+
+  .notif-orange {
+    @apply absolute flex justify-center items-center w-3 h-3 border-2 border-white dark:border-slate-800  bg-orange-400  -top-0.5 -right-0.5 rounded-full;
+  }
+
+  .sidebar-active {
+    @apply bg-[#ED1B24] text-white;
+  }
+
+  .sidebar-item {
+    @apply flex items-center gap-2 px-6 py-4 rounded-xl cursor-pointer hover:bg-[#ED1B24] hover:text-white;
+  }
+
+  .layout-parent {
+    @apply grid grid-cols-7 gap-5;
+  }
+
+  .layout-child-big {
+    @apply lg:col-span-4  col-span-7 grid gap-5;
+  }
+
+  .layout-child-small {
+    @apply lg:col-span-3 col-span-7 grid gap-4;
+  }
+
+  .search {
+    @apply font-medium text-gray-500 py-2 bg-none border-2 dark:bg-slate-700 pl-10 px-2 rounded-lg focus:outline-none md:w-64 w-full text-base;
+  }
+}
+
+.rbc-allday-cell {
+  display: none !important;
+}
+

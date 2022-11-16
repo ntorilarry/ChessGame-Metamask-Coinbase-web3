@@ -1,0 +1,10 @@
+.img-pic{
+    height: 90vh;
+}
+
+.bg{
+    background-image: url("../../core//resources/images/BG.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }

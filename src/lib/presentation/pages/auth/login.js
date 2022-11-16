@@ -1,53 +1,62 @@
 import React from "react";
 import Navbar from "../../components/navbar";
 import "../../css/login.css";
-import Web3 from 'web3';
-import {useState, useEffect} from 'react'
+import Web3 from "web3";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import Bgr from "../../../core/resources/images/BG.jpg"
+import Bgr from "../../../core/resources/images/BG.jpg";
 
 function Login() {
-    let history = useNavigate();
-    const [isConnected, setIsConnected] = useState(false);
-    const [ethBalance, setEthBalance] = useState("");
-    
-    const detectCurrentProvider = () => {
-      let provider;
-      if (window.ethereum) {
-        provider = window.ethereum;
-      } else if (window.web3) {
-        provider = window.web3.currentProvider;
-      } else {
-        console.log("Non-ethereum browser detected. You should install Metamask");
-      }
-      return provider;
-    };
-    
-    const onConnect = async() => {
-      try {
-        const currentProvider = detectCurrentProvider();
-        if(currentProvider) {
-          await currentProvider.request({method: 'eth_requestAccounts'});
-          const web3 = new Web3(currentProvider);
-          const userAccount  =await web3.eth.getAccounts();
-          const account = userAccount[0];
-          let ethBalance = await web3.eth.getBalance(account);
-          setEthBalance(ethBalance);
-          setIsConnected(true);
-          toast.success("Login Successful");
-          history("/administrator");
-        }
-      } catch(err) {
-        console.log(err);
-        toast.error("Login Failed, Non-ethereum browser detected. You should install Metamask");
+  let history = useNavigate();
+  const [isConnected, setIsConnected] = useState(false);
+  const [ethBalance, setEthBalance] = useState("");
+
+  const detectCurrentProvider = () => {
+    let provider;
+    if (window.ethereum) {
+      provider = window.ethereum;
+    } else if (window.web3) {
+      provider = window.web3.currentProvider;
+    } else {
+      if (
+        window.confirm(
+          "Non-ethereum browser detected. You should install Metamask or Coinbase"
+        )
+      ) {
+        window.location.href =
+          "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn";
       }
     }
-    
-    const onDisconnect = () => {
-      setIsConnected(false);
+    return provider;
+  };
+
+  const onConnect = async () => {
+    try {
+      const currentProvider = detectCurrentProvider();
+      if (currentProvider) {
+        await currentProvider.request({ method: "eth_requestAccounts" });
+        const web3 = new Web3(currentProvider);
+        const userAccount = await web3.eth.getAccounts();
+        const account = userAccount[0];
+        let ethBalance = await web3.eth.getBalance(account);
+        setEthBalance(ethBalance);
+        setIsConnected(true);
+        toast.success("Login Successful");
+        history("/administrator");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error(
+        "Login Failed, Non-ethereum browser detected. You should install Metamask or Coinbase"
+      );
     }
-    
+  };
+
+  const onDisconnect = () => {
+    setIsConnected(false);
+  };
+
   return (
     <div>
       <section className="bg">
@@ -56,7 +65,7 @@ function Login() {
           <div className="absolute inset-0">
             <img
               className="object-cover object-center w-full h-full lg:object-center bg-white img-pic"
-                src={Bgr}
+              src={Bgr}
               alt=""
             />
           </div>
@@ -71,12 +80,13 @@ function Login() {
                   games
                 </p>
 
-                <div  className="max-w-sm mx-auto mt-10">
+                <div className="max-w-sm mx-auto mt-10">
                   <div>
-                  {!isConnected && (
-                    <button onClick={onConnect}
-                      type="submit"
-                      className="
+                    {!isConnected && (
+                      <button
+                        onClick={onConnect}
+                        type="submit"
+                        className="
                                 inline-flex
                                 items-center
                                 justify-center
@@ -88,12 +98,14 @@ function Login() {
                                 text-white   
                                 bg-[#438FFE]
                                 border border-transparent
-                                rounded-full "
-                    >
-                      Sign in with metamask
-                    </button>
+                                rounded-full 
+                                hover:bg-[#2563EB]"
+                      >
+                        Sign in with metamask
+                      </button>
                     )}
                     <button
+                      onClick={onConnect}
                       type="submit"
                       className="
                                 inline-flex
@@ -108,33 +120,35 @@ function Login() {
                                 bg-transparent
                                 border-2
                                 border-black
-                                rounded-full "
+                                rounded-full
+                                hover:border-[#2563EB]
+                                hover:text-[#2563EB] "
                     >
                       Sign in with Coinbase Wallet
                     </button>
                   </div>
                 </div>
-                <a className="text-center mt-8" href="">Show more options</a>
+                <p className="text-center mt-8">Show more options</p>
               </div>
             </div>
           </div>
         </div>
-        {/* {isConnected && (
-        <div className="app-wrapper">
-          <div className="app-details">
-            <h2> You are connected to metamask.</h2>
-            <div className="app-balance">
-              <span>Balance: </span>
-              {ethBalance}
+        {isConnected && (
+          <div className="app-wrapper">
+            <div className="app-details">
+              <h2> You are connected to metamask.</h2>
+              <div className="app-balance">
+                <span>Balance: </span>
+                {ethBalance}
+              </div>
+            </div>
+            <div>
+              <button className="app-buttons__logout" onClick={onDisconnect}>
+                Disconnect
+              </button>
             </div>
           </div>
-          <div>
-            <button className="app-buttons__logout" onClick={onDisconnect}>
-            Disconnect
-            </button>
-          </div>
-        </div>
-      )} */}
+        )}
       </section>
     </div>
   );

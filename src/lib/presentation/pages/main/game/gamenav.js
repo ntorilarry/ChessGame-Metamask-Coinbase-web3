@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from "../../../../core/resources/images/logodark.png";
+import Profile from "../../../components/profile";
 
 function Gamenav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,7 +26,7 @@ function Gamenav() {
                   aria-label="Sign up"
                   title="Sign up"
                 >
-                  Sign up
+                  <Profile />
                 </a>
               </li>
             </ul>

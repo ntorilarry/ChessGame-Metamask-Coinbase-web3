@@ -1,4 +1,5 @@
 import React from "react";
+import Logo from "../../core/resources/images/logowhite.png";
 
 function Navbar() {
   return (
@@ -8,10 +9,9 @@ function Navbar() {
           <div className="flex items-center justify-between h-16 lg:h-[72px]">
             <div className="flex items-center flex-shrink-0 ml-4 lg:ml-0">
               <a href="#" title="" className="inline-flex">
-                <span className="sr-only"> Rareblocks logo </span>
                 <img
-                  className="w-auto h-8"
-                  src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/logo.svg"
+                  className="w-auto h-10"
+                  src={Logo}
                   alt=""
                 />
               </a>

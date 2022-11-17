@@ -13,11 +13,11 @@ function Mainlayout() {
   return (
     <div>
       <div>
-        <div className="bg h-screen w-full overflow-y-hidden flex">
+        <div className="bgr h-screen w-full overflow-y-hidden flex">
           {/* sidebar */}
           <div className="side-bar">
             <div
-              className={`absolute top-0 left-0 bottom-0 right-0 bg z-[100] ${
+              className={`absolute top-0 left-0 bottom-0 right-0 bgr z-[100] ${
                 active ? "lg:hidden block" : "hidden"
               }`}
               onClick={onClick}

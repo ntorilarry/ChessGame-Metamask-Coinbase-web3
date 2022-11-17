@@ -44,7 +44,7 @@ function Login() {
         let ethBalance = await web3.eth.getBalance(account);
         setEthBalance(ethBalance);
         setIsConnected(true);
-        auth.Login(isConnected);
+        // auth.Login(isConnected);
         toast.success("Login Successful");
         navigate("/administrator", { replace: true });
       }
@@ -62,7 +62,7 @@ function Login() {
 
   return (
     <div>
-      <section className="bg">
+      <section className="bgr">
         <Navbar />
         <div className="relative py-12 bg-white sm:py-16 lg:py-20">
           <div className="absolute inset-0">

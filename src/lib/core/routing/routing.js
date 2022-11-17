@@ -6,42 +6,46 @@ import Login from "../../presentation/pages/auth/login";
 import { Requireauth } from "../../presentation/pages/auth/requireauth";
 import Adminstrators from "../../presentation/pages/main/adminstrators/adminstrators";
 import Completed from "../../presentation/pages/main/completed/completed";
+import Joingame from "../../presentation/pages/main/game/joingame";
 
 function Routing() {
   return (
     <div>
       <AuthProvider>
-      <Routes>
-        {/* Auth Routes */}
-        <Route path="auth">
-          <Route index element={<Navigate replace to="login" />} />
-          <Route path="login" element={<Login />} />
-        </Route>
+        <Routes>
+          {/* Auth Routes */}
+          <Route path="auth">
+            <Route index element={<Navigate replace to="login" />} />
+            <Route path="login" element={<Login />} />
+          </Route>
 
-        {/* Main Routes */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Mainlayout />
-            </>
-          }
-        >
-          <Route index element={<Navigate replace to="administrator" />} />
-          <Route path="administrator" element={<Requireauth><Adminstrators /></Requireauth>} />
-          <Route path="completed" element={<Requireauth><Completed /></Requireauth>} />
-        </Route>
+          {/* Main Routes */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Mainlayout />
+              </>
+            }
+          >
+            <Route index element={<Navigate replace to="administrator" />} />
+            <Route path="administrator" element={<Adminstrators />} />
+            <Route path="completed" element={<Completed />} />
+          </Route>
+          <Route path="/">
+            <Route path="join-game" element={<Joingame />} />
+          </Route>
 
-        {/* Not found */}
-        <Route
-          path="*"
-          element={
-            <h1 className="text-center text-muted">
-              You have hit the end of the road!
-            </h1>
-          }
-        />
-      </Routes>
+          {/* Not found */}
+          <Route
+            path="*"
+            element={
+              <h1 className="text-center text-muted">
+                You have hit the end of the road!
+              </h1>
+            }
+          />
+        </Routes>
       </AuthProvider>
     </div>
   );

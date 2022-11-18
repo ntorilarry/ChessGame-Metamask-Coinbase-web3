@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Bgr from "../../../core/resources/images/BG.jpg";
 import { useAuth } from "../auth/auth";
+import Metaicon from "../../../core/resources/images/metamaskicon.png";
+import Coinbaseicon from "../../../core/resources/images/coinbase-v2-svgrepo-com.svg";
 
 function Login() {
   const navigate = useNavigate();
@@ -36,13 +38,16 @@ function Login() {
   const onConnect = async () => {
     try {
       const currentProvider = detectCurrentProvider();
+      console.log(currentProvider);
       if (currentProvider) {
         await currentProvider.request({ method: "eth_requestAccounts" });
         const web3 = new Web3(currentProvider);
         const userAccount = await web3.eth.getAccounts();
         const account = userAccount[0];
+        console.log(userAccount);
         let ethBalance = await web3.eth.getBalance(account);
         setEthBalance(ethBalance);
+        console.log(ethBalance);
         setIsConnected(true);
         // auth.Login(isConnected);
         toast.success("Login Successful");
@@ -104,6 +109,7 @@ function Login() {
                                 rounded-full 
                                 hover:bg-[#2563EB]"
                       >
+                        <img className="w-6 mx-4 " src={Metaicon} alt="" />
                         Sign in with metamask
                       </button>
                     )}
@@ -127,6 +133,7 @@ function Login() {
                                 hover:border-[#2563EB]
                                 hover:text-[#2563EB] "
                     >
+                      <img className="w-6 mx-2 " src={Coinbaseicon} alt="" />
                       Sign in with Coinbase Wallet
                     </button>
                   </div>

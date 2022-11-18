@@ -11,7 +11,7 @@ import Joingame from "../../presentation/pages/main/game/joingame";
 function Routing() {
   return (
     <div>
-      <AuthProvider>
+      {/* <AuthProvider> */}
         <Routes>
           {/* Auth Routes */}
           <Route path="auth">
@@ -46,7 +46,7 @@ function Routing() {
             }
           />
         </Routes>
-      </AuthProvider>
+      {/* </AuthProvider> */}
     </div>
   );
 }

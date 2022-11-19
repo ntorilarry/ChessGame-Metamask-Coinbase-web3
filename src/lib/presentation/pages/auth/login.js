@@ -9,12 +9,14 @@ import Bgr from "../../../core/resources/images/BG.jpg";
 import { useAuth } from "../auth/auth";
 import Metaicon from "../../../core/resources/images/metamaskicon.png";
 import Coinbaseicon from "../../../core/resources/images/coinbase-v2-svgrepo-com.svg";
+import Profile from "../../components/profile";
 
 function Login() {
   const navigate = useNavigate();
   const [isConnected, setIsConnected] = useState(false);
   const [ethBalance, setEthBalance] = useState("");
   const auth = useAuth();
+  console.log(isConnected)
 
   const detectCurrentProvider = () => {
     let provider;
@@ -44,15 +46,18 @@ function Login() {
         const web3 = new Web3(currentProvider);
         const userAccount = await web3.eth.getAccounts();
         const account = userAccount[0];
-        console.log(userAccount);
+      
         let ethBalance = await web3.eth.getBalance(account);
         setEthBalance(ethBalance);
-        console.log(ethBalance);
-        setIsConnected(true);
+      console.log(ethBalance)
+        setIsConnected(!isConnected);
+
         auth.login(isConnected);
+        navigate("/administrator");
+        console.log(isConnected)
         toast.success("Login Successful");
         // navigate("/administrator", { replace: true });
-        navigate("/administrator");
+      
         console.log("larry")
       }
     } catch (err) {
@@ -153,6 +158,7 @@ function Login() {
                 <span>Balance: </span>
                 {ethBalance}
               </div>
+              <Profile balance={ethBalance}/>
             </div>
             <div>
               <button className="app-buttons__logout" onClick={onDisconnect}>

@@ -11,7 +11,7 @@ import Joingame from "../../presentation/pages/main/game/joingame";
 function Routing() {
   return (
     <div>
-      {/* <AuthProvider> */}
+      <AuthProvider>
         <Routes>
           {/* Auth Routes */}
           <Route path="auth">
@@ -29,11 +29,11 @@ function Routing() {
             }
           >
             <Route index element={<Navigate replace to="administrator" />} />
-            <Route path="administrator" element={<Adminstrators />} />
-            <Route path="completed" element={<Completed />} />
+            <Route path="administrator" element={<Requireauth><Adminstrators /></Requireauth>} />
+            <Route path="completed" element={<Requireauth><Completed /></Requireauth>} />
           </Route>
           <Route path="/">
-            <Route path="join-game" element={<Joingame />} />
+            <Route path="join-game" element={<Requireauth><Joingame /></Requireauth>} />
           </Route>
 
           {/* Not found */}
@@ -46,7 +46,7 @@ function Routing() {
             }
           />
         </Routes>
-      {/* </AuthProvider> */}
+      </AuthProvider>
     </div>
   );
 }

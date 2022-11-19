@@ -12,7 +12,7 @@ import Coinbaseicon from "../../../core/resources/images/coinbase-v2-svgrepo-com
 
 function Login() {
   const navigate = useNavigate();
-  const [isConnected, setIsConnected] = useState(false);
+  const [isConnected, setIsConnected] = useState("false");
   const [ethBalance, setEthBalance] = useState("");
   const auth = useAuth();
 
@@ -49,9 +49,11 @@ function Login() {
         setEthBalance(ethBalance);
         console.log(ethBalance);
         setIsConnected(true);
-        // auth.Login(isConnected);
+        auth.login(isConnected);
         toast.success("Login Successful");
-        navigate("/administrator", { replace: true });
+        // navigate("/administrator", { replace: true });
+        navigate("/administrator");
+        console.log("larry")
       }
     } catch (err) {
       console.log(err);

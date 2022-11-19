@@ -11,11 +11,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setIsConnected(null);
+    setIsConnected(null); 
   };
 
   return (
-    <AuthContext.Provider value={(isConnected, login, logout)}>
+    <AuthContext.Provider value={{isConnected, login, logout}}>
       {children}
     </AuthContext.Provider>
   );

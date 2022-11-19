@@ -29,7 +29,7 @@ function Login() {
         )
       ) {
         window.location.href =
-          "https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn";
+          "https://metamask.io/";
       }
     }
     return provider;

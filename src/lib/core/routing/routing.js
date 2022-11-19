@@ -7,6 +7,7 @@ import { Requireauth } from "../../presentation/pages/auth/requireauth";
 import Adminstrators from "../../presentation/pages/main/adminstrators/adminstrators";
 import Completed from "../../presentation/pages/main/completed/completed";
 import Joingame from "../../presentation/pages/main/game/joingame";
+import Pagedoesnotexist from "../../presentation/pages/main/pagedoesnotexist";
 
 function Routing() {
   return (
@@ -40,9 +41,7 @@ function Routing() {
           <Route
             path="*"
             element={
-              <h1 className="text-center text-muted">
-                You have hit the end of the road!
-              </h1>
+             <Pagedoesnotexist/>
             }
           />
         </Routes>

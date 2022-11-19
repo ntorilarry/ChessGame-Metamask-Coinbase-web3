@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Gamenav from "./gamenav";
-
+import PuffLoader from "react-spinners/PuffLoader";
 import Timer from "./timer";
 import Chess from "../../../../core/resources/images/phpssvLon.gif";
 import Gamemodal from "./gamemodal";
 
 function Joingame() {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
+
+
   return (
+    <div>
+    {loading ? (
+      <div className="flex h-[100vh] justify-center bg-[#292927] items-center"><PuffLoader size={80} color={"white"} loading={loading}  /></div>
+    ) : (
     <div className="bg-[#292927]">
       <Gamenav />
-     
+
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-10">
-      <p className="text-white">
-        <Gamemodal/>
-      </p>
+        <p className="text-white">
+          <Gamemodal />
+        </p>
         <div className="mx-auto sm:text-center lg:max-w-2xl">
           <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
             <header class="text-gray-600 w-full ">
@@ -72,6 +86,8 @@ function Joingame() {
           </div>
         </div>
       </div>
+    </div>
+    )}
     </div>
   );
 }

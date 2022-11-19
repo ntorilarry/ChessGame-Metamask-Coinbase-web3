@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
-
+import PuffLoader from "react-spinners/PuffLoader";
 import Table from "../adminstrators/adminTable"; //
 import Datepicker from "../adminstrators/shared/datepicker";
 import Mytab from "../adminstrators/shared/mytab";
@@ -93,20 +91,36 @@ function Completed() {
   );
 
   const data = React.useMemo(() => getData(), []);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
 
   return (
-    <div className="p-4 min-h-screen lg:mx-12 bg text-gray-900">
-      <div className="flex items-center justify-end items-center ">
-        <Datepicker />
-        <Modal />
-      </div>
-      <Mytab />
-      <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 bg-white ">
-        <div className=""></div>
-        <div className="mt-6">
-          <Table columns={columns} data={data} />
+    <div>
+      {loading ? (
+        <div className="flex h-[90vh] justify-center bg-white items-center">
+          <PuffLoader size={80} color={"#438FFE"} loading={loading} />
         </div>
-      </main>
+      ) : (
+        <div className="p-4 min-h-screen lg:mx-12 bg text-gray-900">
+          <div className="flex items-center justify-end items-center ">
+            <Datepicker />
+            <Modal />
+          </div>
+          <Mytab />
+          <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 bg-white ">
+            <div className=""></div>
+            <div className="mt-6">
+              <Table columns={columns} data={data} />
+            </div>
+          </main>
+        </div>
+      )}
     </div>
   );
 }

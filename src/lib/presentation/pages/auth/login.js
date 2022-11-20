@@ -76,11 +76,12 @@ function Login() {
       auth.userBalance(ethBal);
       setIsConnected(true);
       auth.login(true);
+      auth.login(isConnected);
       localStorage.setItem(
         "userAuthObjectModel",
         JSON.stringify(userObjectModel)
       );
-
+      auth.login(isConnected);
       navigate("/administrator", { replace: true });
       toast.success("Login Successful");
     } catch (error) {

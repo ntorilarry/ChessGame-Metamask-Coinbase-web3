@@ -252,11 +252,7 @@ function AdminTable({ columns, data }) {
                                 cell.render("Cell")
                               )}
                             </td>
-                            //   <td className="px-6 py-4 whitespace-nowrap" details="cell">
-                            //   <a className="text-green-500 hover:text-green-700" href="#">
-                            //     Edit
-                            //   </a>
-                            // </td>
+                      
                           );
                         })}
                       </tr>
@@ -287,7 +283,7 @@ function AdminTable({ columns, data }) {
             <label>
               <span className="sr-only">Items Per Page</span>
               <select
-                className="bg-white  mt-1 block w-full rounded-xl border-2 border-[#ED1B24] shadow-sm focus:border-[#ED1B24] focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="bg-white  mt-1 block w-full rounded-xl border-2 border-[#438FFE] shadow-sm focus:border-[#438FFE] focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 value={state.pageSize}
                 onChange={(e) => {
                   setPageSize(Number(e.target.value));

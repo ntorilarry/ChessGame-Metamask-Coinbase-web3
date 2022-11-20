@@ -66,13 +66,13 @@ function Modal() {
                         </div>
                         <div className="items-center gap-2 mt-3 sm:flex">
                           <Link to="/join-game"
-                            className="w-full mt-2 p-2.5 flex-1 text-center text-white bg-[#438FFE] rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                            className="w-full block mt-2 p-2.5 flex-1 text-center text-white bg-[#438FFE] rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                             // onClick={() => setShowModal(false)}
                           >
                             Save
                           </Link>
                           <button
-                            className="w-full mt-2 p-2.5 flex-1 bg-[#ED1B24] text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2 dark:text-white"
+                            className="w-full block mt-2 p-2.5 flex-1 bg-[#ED1B24] text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2 dark:text-white"
                             onClick={() => setShowModal(false)}
                           >
                             Cancel

@@ -6,10 +6,14 @@ function Gamemodal() {
   const [showModal, setShowModal] = React.useState(false);
   return (
     <div>
-      <a className="flex items-center text-white justify-center sm:justify-start" type="button" onClick={() => setShowModal(true)}>
+      <button
+        className="flex items-center mx-auto my-4 sm:mx-0 text-white justify-center sm:justify-start"
+        type="button"
+        onClick={() => setShowModal(true)}
+      >
         <BiArrowBack />
         Go Back
-      </a>
+      </button>
       <>
         {showModal ? (
           <>
@@ -27,14 +31,15 @@ function Gamemodal() {
                       </h2>
                       <form>
                         <div className="items-center gap-2 mt-3 sm:flex">
-                          <Link to="/administrator"
-                            className="w-full mt-2 p-2.5 flex-1 text-center text-white bg-[#438FFE] rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
+                          <Link
+                            to="/administrator"
+                            className="w-full block my-2 p-2.5 flex-1 text-center text-white bg-[#438FFE] rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
                             // onClick={() => setShowModal(false)}
                           >
                             Yes
                           </Link>
                           <button
-                            className="w-full mt-2 p-2.5 flex-1 bg-[#ED1B24] text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2 dark:text-white"
+                            className="w-full block my-2 p-2.5 flex-1 bg-[#ED1B24] text-white rounded-md outline-none ring-offset-2 ring-indigo-600 focus:ring-2"
                             onClick={() => setShowModal(false)}
                           >
                             No

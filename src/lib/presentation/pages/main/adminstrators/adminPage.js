@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
-
+import React from "react";
 import Table from "./adminTable"; //
 import Datepicker from "./shared/datepicker";
 import Mytab from "./shared/mytab";

@@ -9,7 +9,7 @@ function Mytab() {
           <li className="mr-2">
             <a
               href="#"
-              className="inline-block p-4 rounded-t-lg hover:border-b-2 hover:border-blue-600 active hover:text-gray-600 hover:border-gray-300 "
+              className="inline-block p-4 text-blue-600 rounded-t-lg hover:border-b-2 hover:border-blue-600"
             >
               Available Games
             </a>

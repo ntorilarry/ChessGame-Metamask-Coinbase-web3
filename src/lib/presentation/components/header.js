@@ -8,7 +8,7 @@ function Header(props) {
     <div>
       <div className="bg-white  z-[99] sticky top-0">
         <div className="sm:px-10">
-          <div className="flex justify-between item-center px-4 py-4">
+          <div className="flex flex-wrap sm:flex-nowrap justify-between item-center px-4 py-4">
             <div className="flex items-center gap-4 ">
               <img className="h-10" src={Logo} alt="" />
             </div>

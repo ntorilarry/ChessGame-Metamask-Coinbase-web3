@@ -16,7 +16,7 @@ function Login() {
   const [isConnected, setIsConnected] = useState(false);
   const [ethBalance, setEthBalance] = useState("");
   const auth = useAuth();
-  console.log(isConnected)
+  console.log(isConnected);
 
   const detectCurrentProvider = () => {
     let provider;
@@ -30,8 +30,7 @@ function Login() {
           "Non-ethereum browser detected. You should install Metamask or Coinbase"
         )
       ) {
-        window.location.href =
-          "https://metamask.io/";
+        window.location.href = "https://metamask.io/";
       }
     }
     return provider;
@@ -46,19 +45,19 @@ function Login() {
         const web3 = new Web3(currentProvider);
         const userAccount = await web3.eth.getAccounts();
         const account = userAccount[0];
-      
+
         let ethBalance = await web3.eth.getBalance(account);
         setEthBalance(ethBalance);
-      console.log(ethBalance)
+        console.log(ethBalance);
         setIsConnected(!isConnected);
 
         auth.login(isConnected);
         navigate("/administrator");
-        console.log(isConnected)
+        console.log(isConnected);
         toast.success("Login Successful");
         // navigate("/administrator", { replace: true });
-      
-        console.log("larry")
+
+        console.log("larry");
       }
     } catch (err) {
       console.log(err);
@@ -158,7 +157,7 @@ function Login() {
                 <span>Balance: </span>
                 {ethBalance}
               </div>
-              <Profile balance={ethBalance}/>
+              <Profile balance={ethBalance} />
             </div>
             <div>
               <button className="app-buttons__logout" onClick={onDisconnect}>

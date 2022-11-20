@@ -30,11 +30,11 @@ function Routing() {
             }
           >
             <Route index element={<Navigate replace to="administrator" />} />
-            <Route path="administrator" element={<Requireauth><Adminstrators /></Requireauth>} />
-            <Route path="completed" element={<Requireauth><Completed /></Requireauth>} />
+            <Route path="administrator" element={<Adminstrators />} />
+            <Route path="completed" element={<Completed />} />
           </Route>
           <Route path="/">
-            <Route path="join-game" element={<Requireauth><Joingame /></Requireauth>} />
+            <Route path="join-game" element={<Joingame />} />
           </Route>
 
           {/* Not found */}

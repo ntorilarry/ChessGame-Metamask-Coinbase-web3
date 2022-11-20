@@ -1,22 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar";
 import "../../css/login.css";
 import Web3 from "web3";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Bgr from "../../../core/resources/images/BG.jpg";
 import { useAuth } from "../auth/auth";
 import Metaicon from "../../../core/resources/images/metamaskicon.png";
 import Coinbaseicon from "../../../core/resources/images/coinbase-v2-svgrepo-com.svg";
-import Profile from "../../components/profile";
 
 function Login() {
   const navigate = useNavigate();
   const [isConnected, setIsConnected] = useState(false);
-  const [ethBalance, setEthBalance] = useState("");
   const auth = useAuth();
-  console.log(isConnected);
 
   const detectCurrentProvider = () => {
     let provider;
@@ -36,36 +32,61 @@ function Login() {
     return provider;
   };
 
-  const onConnect = async () => {
-    try {
-      const currentProvider = detectCurrentProvider();
-      console.log(currentProvider);
-      if (currentProvider) {
-        await currentProvider.request({ method: "eth_requestAccounts" });
-        const web3 = new Web3(currentProvider);
-        const userAccount = await web3.eth.getAccounts();
-        const account = userAccount[0];
-
-        let ethBalance = await web3.eth.getBalance(account);
-        setEthBalance(ethBalance);
-        console.log(ethBalance);
-        setIsConnected(!isConnected);
-
-        auth.login(isConnected);
-        navigate("/administrator");
-        console.log(isConnected);
-        toast.success("Login Successful");
-        // navigate("/administrator", { replace: true });
-
-        console.log("larry");
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error(
-        "Login Failed, Non-ethereum browser detected. You should install Metamask or Coinbase"
-      );
+  async function onConnect(event) {
+    event.preventDefault();
+    const currentProvider = detectCurrentProvider();
+    if (currentProvider) {
+      currentProvider
+        .request({ method: "eth_requestAccounts" })
+        .then(async () => {
+          try {
+            await getAccounts(currentProvider);
+          } catch (error) {
+            console.log(error);
+          }
+        })
+        .catch((err) => console.log(err));
     }
-  };
+  }
+
+  async function getAccounts(currentProvider) {
+    let results;
+    const web3 = new Web3(currentProvider);
+    web3.eth.getAccounts().then(async (res) => {
+      try {
+        await getBalance(web3, res[0]);
+        auth.userAccount(res[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+    return results;
+  }
+
+  async function getBalance(web3, account) {
+    try {
+      let ethBal = await web3.eth.getBalance(account);
+      // setting the object state values
+      const userObjectModel = {
+        isAuth: true,
+        ethBal: ethBal,
+        userAccount: account,
+      };
+
+      auth.userBalance(ethBal);
+      setIsConnected(true);
+      auth.login(true);
+      localStorage.setItem(
+        "userAuthObjectModel",
+        JSON.stringify(userObjectModel)
+      );
+
+      navigate("/administrator", { replace: true });
+      toast.success("Login Successful");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const onDisconnect = () => {
     setIsConnected(false);
@@ -96,11 +117,10 @@ function Login() {
 
                 <div className="max-w-sm mx-auto mt-10">
                   <div>
-                    {!isConnected && (
-                      <button
-                        onClick={onConnect}
-                        type="submit"
-                        className="
+                    <button
+                      onClick={(e) => onConnect(e)}
+                      type="submit"
+                      className="
                                 inline-flex
                                 items-center
                                 justify-center
@@ -114,11 +134,10 @@ function Login() {
                                 border border-transparent
                                 rounded-full 
                                 hover:bg-[#2563EB]"
-                      >
-                        <img className="w-6 mx-4 " src={Metaicon} alt="" />
-                        Sign in with metamask
-                      </button>
-                    )}
+                    >
+                      <img className="w-6 mx-4 " src={Metaicon} alt="" />
+                      Sign in with metamask
+                    </button>
                     <button
                       onClick={onConnect}
                       type="submit"
@@ -149,23 +168,6 @@ function Login() {
             </div>
           </div>
         </div>
-        {isConnected && (
-          <div className="app-wrapper">
-            <div className="app-details">
-              <h2> You are connected to metamask.</h2>
-              <div className="app-balance">
-                <span>Balance: </span>
-                {ethBalance}
-              </div>
-              <Profile balance={ethBalance} />
-            </div>
-            <div>
-              <button className="app-buttons__logout" onClick={onDisconnect}>
-                Disconnect
-              </button>
-            </div>
-          </div>
-        )}
       </section>
     </div>
   );

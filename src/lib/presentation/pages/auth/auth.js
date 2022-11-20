@@ -3,10 +3,23 @@ import { useState, useContext, createContext } from "react";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [isConnected, setIsConnected] = useState(null);
+  const userAccountModel = JSON.parse(localStorage.getItem("userAuthObjectModel"))
+  const acc = userAccountModel ? userAccountModel.userAccount : ""
+  const bal = userAccountModel ? userAccountModel.ethBal : 0
+  
+  const [isConnected, setIsConnected] = useState(false);
+  const [account, setUserAccount] = useState(acc)
+  const [ethBal, setEthBal] = useState(bal)
 
+  const userAccount = (userAccount) => {
+    setUserAccount(userAccount)
+  }
 
-  const login = (isConnected) => {
+  const userBalance = (userBal) => {
+    setEthBal(userBal)
+  }
+
+  const login = (isConnected) => {                  
     setIsConnected(isConnected);
   };
 
@@ -15,7 +28,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{isConnected, login, logout}}>
+    <AuthContext.Provider value={{isConnected, login, logout, account, ethBal, userAccount, userBalance }}>
       {children}
     </AuthContext.Provider>
   );

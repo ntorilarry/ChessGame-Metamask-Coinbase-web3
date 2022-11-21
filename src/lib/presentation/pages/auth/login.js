@@ -89,10 +89,6 @@ function Login() {
     }
   }
 
-  const onDisconnect = () => {
-    setIsConnected(false);
-  };
-
   return (
     <div>
       <section className="bgr">

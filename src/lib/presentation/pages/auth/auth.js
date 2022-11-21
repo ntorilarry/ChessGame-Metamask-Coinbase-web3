@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setIsConnected(null); 
+    setIsConnected(false); 
   };
 
   return (

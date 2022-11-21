@@ -23,7 +23,7 @@ function Profile() {
         <li className="bg-[#438FFE] py-2 px-2 font-medium tracking-wide text-white transition-colors duration-200 hover:text-deep-purple-accent-400">
           {ethBal} ETH
         </li>
-        <li className="bg-white font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
+        <li className="bg-white py-2 px-2 font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
           {account}
         </li>
 
